@@ -156,7 +156,7 @@ const UserMessagesTable = () => {
 
   // Función para obtener el total de mensajes por hora
   const getTotalMensajesPorHora = (user, hora) => {
-    return user.mensajesPorHora[parseInt(hora).toString()] || 0
+    return user.mensajesPorHora[hora] || 0
   }
 
   return (
