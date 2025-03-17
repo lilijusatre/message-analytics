@@ -3,7 +3,7 @@ import './App.css'
 // import Dashboard from './components/Dashboard'
 import UserMessagesTable from './components/UserMessagesTable'
 import ComparativaUsuarios from './components/ComparativaUsuarios'
-
+import MessagesComparisonChart from './components/MessagesComparisonChart'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -20,7 +20,16 @@ function App() {
         <main className="py-6">
           <div className="mt-8">
             <UserMessagesTable />
-            <ComparativaUsuarios />
+            <div>
+              <h2 className="text-2xl font-bold mb-4">
+                Comparación de Mensajes Entrantes vs Salientes
+              </h2>
+              <h3 className="text-xl font-bold mb-4">
+                Total de mensajes: 16709
+              </h3>
+              <ComparativaUsuarios />
+              <MessagesComparisonChart />
+            </div>
           </div>
         </main>
       </div>

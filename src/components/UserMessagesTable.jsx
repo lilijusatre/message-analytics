@@ -161,80 +161,84 @@ const UserMessagesTable = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">
-        Distribución de Mensajes por Hora y Día
-      </h2>
-      <div className="overflow-x-auto">
-        <table className="min-w-full bg-white border border-gray-300 shadow-lg rounded-lg">
-          <thead className="bg-gray-800 text-white">
-            <tr>
-              <th className="px-4 py-3 text-left">Hora</th>
-              <th className="px-4 py-3 text-left">Usuario</th>
-              {diasOrdenados.map(dia => (
-                <th key={dia} className="px-4 py-3 text-left">
-                  {getDayName(dia)}
-                </th>
-              ))}
-              <th className="px-4 py-3 text-left">Total Hora</th>
-            </tr>
-          </thead>
-          <tbody>
-            {horas.map(hora => (
-              <React.Fragment key={hora}>
-                {messages.map((user, userIndex) => (
-                  <tr
-                    key={`${hora}-${user.usuario}`}
-                    className={`hover:bg-gray-50 ${
-                      userIndex === messages.length - 1
-                        ? 'border-b-2 border-gray-300'
-                        : 'border-b'
-                    }`}
-                  >
-                    {userIndex === 0 ? (
-                      <td
-                        className="px-4 py-3 font-medium"
-                        rowSpan={messages.length}
+      <div className="space-y-8">
+        <div>
+          <h2 className="text-2xl font-bold mb-4">
+            Distribución de Mensajes por Hora y Día
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="min-w-full bg-white border border-gray-300 shadow-lg rounded-lg">
+              <thead className="bg-gray-800 text-white">
+                <tr>
+                  <th className="px-4 py-3 text-left">Hora</th>
+                  <th className="px-4 py-3 text-left">Usuario</th>
+                  {diasOrdenados.map(dia => (
+                    <th key={dia} className="px-4 py-3 text-left">
+                      {getDayName(dia)}
+                    </th>
+                  ))}
+                  <th className="px-4 py-3 text-left">Total Hora</th>
+                </tr>
+              </thead>
+              <tbody>
+                {horas.map(hora => (
+                  <React.Fragment key={hora}>
+                    {messages.map((user, userIndex) => (
+                      <tr
+                        key={`${hora}-${user.usuario}`}
+                        className={`hover:bg-gray-50 ${
+                          userIndex === messages.length - 1
+                            ? 'border-b-2 border-gray-300'
+                            : 'border-b'
+                        }`}
                       >
-                        {hora}:00
-                      </td>
-                    ) : null}
-                    <td className="px-4 py-3">{user.usuario}</td>
-                    {diasOrdenados.map(dia => (
-                      <td key={dia} className="px-4 py-3">
-                        {getMensajesPorHoraDia(user, hora, dia)}
-                      </td>
+                        {userIndex === 0 ? (
+                          <td
+                            className="px-4 py-3 font-medium"
+                            rowSpan={messages.length}
+                          >
+                            {hora}:00
+                          </td>
+                        ) : null}
+                        <td className="px-4 py-3">{user.usuario}</td>
+                        {diasOrdenados.map(dia => (
+                          <td key={dia} className="px-4 py-3">
+                            {getMensajesPorHoraDia(user, hora, dia)}
+                          </td>
+                        ))}
+                        <td className="px-4 py-3">
+                          {getTotalMensajesPorHora(user, hora)}
+                        </td>
+                      </tr>
                     ))}
-                    <td className="px-4 py-3">
-                      {getTotalMensajesPorHora(user, hora)}
-                    </td>
-                  </tr>
+                    {hora === '23' && (
+                      <tr className="bg-gray-100 font-bold">
+                        <td className="px-4 py-3" colSpan={2}>
+                          Total General
+                        </td>
+                        {diasOrdenados.map(dia => (
+                          <td key={dia} className="px-4 py-3">
+                            {messages.reduce(
+                              (total, user) =>
+                                total + (user.mensajesPorDia[dia] || 0),
+                              0,
+                            )}
+                          </td>
+                        ))}
+                        <td className="px-4 py-3">
+                          {messages.reduce(
+                            (total, user) => total + user.totalMensajes,
+                            0,
+                          )}
+                        </td>
+                      </tr>
+                    )}
+                  </React.Fragment>
                 ))}
-                {hora === '23' && (
-                  <tr className="bg-gray-100 font-bold">
-                    <td className="px-4 py-3" colSpan={2}>
-                      Total General
-                    </td>
-                    {diasOrdenados.map(dia => (
-                      <td key={dia} className="px-4 py-3">
-                        {messages.reduce(
-                          (total, user) =>
-                            total + (user.mensajesPorDia[dia] || 0),
-                          0,
-                        )}
-                      </td>
-                    ))}
-                    <td className="px-4 py-3">
-                      {messages.reduce(
-                        (total, user) => total + user.totalMensajes,
-                        0,
-                      )}
-                    </td>
-                  </tr>
-                )}
-              </React.Fragment>
-            ))}
-          </tbody>
-        </table>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   )
