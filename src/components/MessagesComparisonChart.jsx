@@ -26,7 +26,7 @@ const MessagesComparisonChart = () => {
         const data = await response.json()
 
         // Encontrar los usuarios específicos
-        const lizbethData = data.find(u => u.usuario === 'Lizbeth B')
+        const lizbethData = data.find(u => u.usuario === 'turno matutino')
         const csupportData = data.find(u => u.usuario === 'csupport')
         const mensajesEntrantes = data.find(
           u => u.usuario === 'mensajes entrantes',
@@ -67,7 +67,7 @@ const MessagesComparisonChart = () => {
 
           const datasets = [
             {
-              label: 'Mensajes Salientes (Lizbeth B + csupport)',
+              label: 'Mensajes Salientes (turno matutino + csupport)',
               data: horas.map(hora => mensajesSalientes[hora]),
               backgroundColor: 'rgba(53, 162, 235, 0.5)',
               borderColor: 'rgb(53, 162, 235)',
