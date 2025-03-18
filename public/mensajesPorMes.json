@@ -1,0 +1,87 @@
+{
+  "meses": [
+    {
+      "mes": "September 2024",
+      "usuarios": {
+        "Lizbeth Bernardo": 614,
+        "mensajes automaticos": 557,
+        "mensajes entrantes": 490,
+        "csupport": 789,
+        "Damaris Ayala": 87,
+        "Lizeth Gonzalez": 3
+      },
+      "totalMensajes": 2834
+    },
+    {
+      "mes": "October 2024",
+      "usuarios": {
+        "Lizbeth Bernardo": 846,
+        "mensajes automaticos": 926,
+        "mensajes entrantes": 811,
+        "csupport": 368,
+        "Damaris Ayala": 17,
+        "Lizeth Gonzalez": 0
+      },
+      "totalMensajes": 2602
+    },
+    {
+      "mes": "November 2024",
+      "usuarios": {
+        "Lizbeth Bernardo": 719,
+        "mensajes automaticos": 815,
+        "mensajes entrantes": 764,
+        "csupport": 592,
+        "Lizeth Gonzalez": 0
+      },
+      "totalMensajes": 2624
+    },
+    {
+      "mes": "December 2024",
+      "usuarios": {
+        "Lizbeth Bernardo": 709,
+        "mensajes automaticos": 785,
+        "mensajes entrantes": 749,
+        "csupport": 798,
+        "Lizeth Gonzalez": 3
+      },
+      "totalMensajes": 2513
+    },
+    {
+      "mes": "January 2025",
+      "usuarios": {
+        "Lizbeth Bernardo": 695,
+        "mensajes automaticos": 830,
+        "mensajes entrantes": 601,
+        "csupport": 404,
+        "Lizeth Gonzalez": 6,
+        "Miriam Cruz": 4
+      },
+      "totalMensajes": 2542
+    },
+    {
+      "mes": "February 2025",
+      "usuarios": {
+        "Lizbeth Bernardo": 1053,
+        "mensajes automaticos": 1322,
+        "mensajes entrantes": 757,
+        "csupport": 455,
+        "Lizeth Gonzalez": 50,
+        "Miriam Cruz": 3,
+        "Paulina Dominguez": 4
+      },
+      "totalMensajes": 3462
+    },
+    {
+      "mes": "March 2025",
+      "usuarios": {
+        "Lizbeth Bernardo": 668,
+        "mensajes automaticos": 1116,
+        "mensajes entrantes": 829,
+        "csupport": 427,
+        "Miriam Cruz": 8,
+        "Paulina Dominguez": 18
+      },
+      "totalMensajes": 3066
+    }
+  ]
+}

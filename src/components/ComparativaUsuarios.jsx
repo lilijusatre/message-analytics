@@ -49,7 +49,7 @@ const ComparativaUsuarios = () => {
         const response = await fetch('/mensajesPorUsuario.json')
         const data = await response.json()
 
-        const lizbeth = data.find(u => u.usuario === 'turno matutino')
+        const lizbeth = data.find(u => u.usuario === 'Lizbeth B')
         const csupport = data.find(u => u.usuario === 'csupport')
         const mensajesAutomaticos = data.find(
           u => u.usuario === 'mensajes automaticos',
@@ -90,7 +90,7 @@ const ComparativaUsuarios = () => {
 
           const datasetConfig = [
             {
-              label: 'turno matutino',
+              label: 'Lizbeth B',
               backgroundColor: 'rgba(53, 162, 235, 0.5)',
               borderColor: 'rgb(53, 162, 235)',
             },

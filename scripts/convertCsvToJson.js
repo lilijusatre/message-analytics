@@ -9,7 +9,7 @@ const __dirname = dirname(__filename)
 // Mapeo de nombres de usuario
 const userNames = {
   'User #955402': 'Zoey Vela',
-  'User #943867': 'turno matutino',
+  'User #943867': 'Lizbeth Bernardo',
   'User #920496': 'csupport@vive.properties',
   'User #945049': 'Damaris Ayala',
   system: 'system',
