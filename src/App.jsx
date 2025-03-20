@@ -4,6 +4,10 @@ import './App.css'
 import UserMessagesTable from './components/UserMessagesTable'
 import ComparativaUsuarios from './components/ComparativaUsuarios'
 import MessagesComparisonChart from './components/MessagesComparisonChart'
+import MessagesByMonthChart from './components/MessagesByMonthChart3'
+import ComparativaUsuariosTrimestre from './components/ComparativaUsuariosTrimestre'
+import MessagesByMonthChart3 from './components/MessagesByMonthChart3'
+
 function App() {
   const [count, setCount] = useState(0)
 
@@ -29,6 +33,16 @@ function App() {
               </h3>
               <ComparativaUsuarios />
               <MessagesComparisonChart />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold mb-4">
+                Comparación de Mensajes Ultimo trimestre
+              </h2>
+              <h3 className="text-xl font-bold mb-4">
+                Total de mensajes: 8600
+              </h3>
+              <MessagesByMonthChart3 />
+              <ComparativaUsuariosTrimestre />
             </div>
           </div>
         </main>

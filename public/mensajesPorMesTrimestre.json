@@ -1,0 +1,41 @@
+{
+  "meses": [
+    {
+      "mes": "January 2025",
+      "usuarios": {
+        "Lizbeth Bernardo": 691,
+        "mensajes recibidos": 602,
+        "mensajes automaticos": 834,
+        "csupport": 405,
+        "Lizeth Gonzalez": 6,
+        "Miriam Cruz": 4
+      },
+      "totalMensajes": 2542
+    },
+    {
+      "mes": "February 2025",
+      "usuarios": {
+        "Lizbeth Bernardo": 1054,
+        "mensajes recibidos": 761,
+        "mensajes automaticos": 1318,
+        "csupport": 272,
+        "Lizeth Gonzalez": 50,
+        "Miriam Cruz": 3,
+        "Paulina Dominguez": 4
+      },
+      "totalMensajes": 3462
+    },
+    {
+      "mes": "March 2025",
+      "usuarios": {
+        "Lizbeth Bernardo": 675,
+        "mensajes recibidos": 826,
+        "mensajes automaticos": 1119,
+        "csupport": 427,
+        "Miriam Cruz": 8,
+        "Paulina Dominguez": 18
+      },
+      "totalMensajes": 3075
+    }
+  ]
+}
