@@ -13,13 +13,40 @@ import { Bar } from 'react-chartjs-2'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
+/**
+ * Componente que muestra un gráfico de barras con la distribución de mensajes por usuario
+ * durante los meses del último trimestre.
+ *
+ * @component
+ * @example
+ * ```jsx
+ * <MessagesByMonthChart3 />
+ * ```
+ *
+ * @returns {JSX.Element} Gráfico de barras comparativo de mensajes por mes
+ */
 const MessagesByMonthChart = () => {
+  /**
+   * Estado para los datos del gráfico
+   * @type {{
+   *   labels: string[],
+   *   datasets: Array<{
+   *     label: string,
+   *     data: number[],
+   *     backgroundColor: string,
+   *     borderWidth: number
+   *   }>
+   * }}
+   */
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [],
   })
 
-  // Mapeo fijo de colores para cada usuario
+  /**
+   * Mapeo fijo de colores para cada usuario
+   * @type {Object.<string, string>}
+   */
   const userColors = {
     'Lizbeth Bernardo': 'rgb(75, 192, 192)',
     'mensajes automaticos': 'rgb(255, 99, 132)',
@@ -31,6 +58,11 @@ const MessagesByMonthChart = () => {
     'Paulina Dominguez': 'rgb(15, 102, 255)',
   }
 
+  /**
+   * Efecto que carga y procesa los datos para el gráfico
+   * Realiza una petición fetch al archivo JSON y prepara los datos
+   * para la visualización en Chart.js
+   */
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -68,6 +100,10 @@ const MessagesByMonthChart = () => {
     fetchData()
   }, [])
 
+  /**
+   * Opciones de configuración para el gráfico
+   * @type {Object}
+   */
   const options = {
     responsive: true,
     plugins: {

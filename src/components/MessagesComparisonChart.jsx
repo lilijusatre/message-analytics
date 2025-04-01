@@ -13,12 +13,42 @@ import { Bar } from 'react-chartjs-2'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
+/**
+ * Componente que muestra un gráfico comparativo entre mensajes entrantes
+ * y salientes (Lizbeth B + csupport) por hora del día.
+ *
+ * @component
+ * @example
+ * ```jsx
+ * <MessagesComparisonChart />
+ * ```
+ *
+ * @returns {JSX.Element} Gráfico de barras comparativo de mensajes
+ */
 const MessagesComparisonChart = () => {
+  /**
+   * Estado para los datos del gráfico
+   * @type {{
+   *   labels: string[],
+   *   datasets: Array<{
+   *     label: string,
+   *     data: number[],
+   *     backgroundColor: string,
+   *     borderColor: string,
+   *     borderWidth: number
+   *   }>
+   * }}
+   */
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [],
   })
 
+  /**
+   * Efecto que carga y procesa los datos para el gráfico
+   * Combina los mensajes de Lizbeth B y csupport como mensajes salientes
+   * y los compara con los mensajes entrantes por hora
+   */
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -37,7 +67,11 @@ const MessagesComparisonChart = () => {
             i.toString().padStart(2, '0'),
           )
 
-          // Normalizar el formato de las horas para cada usuario
+          /**
+           * Función para normalizar el formato de las horas
+           * @param {Object} mensajesPorHora - Objeto con las horas y cantidades
+           * @returns {Object} Objeto con horas normalizadas (formato 00-23)
+           */
           const normalizarHoras = mensajesPorHora => {
             const normalizado = {}
             Object.entries(mensajesPorHora).forEach(([hora, cantidad]) => {
@@ -95,6 +129,11 @@ const MessagesComparisonChart = () => {
     fetchData()
   }, [])
 
+  /**
+   * Configuración del gráfico
+   * Define las opciones de visualización y formato
+   * @type {Object}
+   */
   const options = {
     responsive: true,
     plugins: {

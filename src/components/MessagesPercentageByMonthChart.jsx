@@ -13,13 +13,42 @@ import { Bar } from 'react-chartjs-2'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
+/**
+ * Componente que muestra un gráfico de barras apiladas con los porcentajes
+ * de mensajes por usuario para cada mes.
+ *
+ * @component
+ * @example
+ * ```jsx
+ * <MessagesPercentageByMonthChart />
+ * ```
+ *
+ * @returns {JSX.Element} Gráfico de barras apiladas con porcentajes
+ */
 const MessagesPercentageByMonthChart = () => {
+  /**
+   * Estado para los datos del gráfico
+   * @type {{
+   *   labels: string[],
+   *   datasets: Array<{
+   *     label: string,
+   *     data: number[],
+   *     backgroundColor: string,
+   *     borderColor: string,
+   *     borderWidth: number
+   *   }>
+   * }}
+   */
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [],
   })
 
-  // Mapeo fijo de colores para cada usuario
+  /**
+   * Mapeo fijo de colores para cada usuario
+   * Los colores se mantienen consistentes en toda la aplicación
+   * @type {Object.<string, string>}
+   */
   const userColors = {
     'Lizbeth Bernardo': 'rgb(75, 192, 192)',
     'mensajes automaticos': 'rgb(255, 99, 132)',
@@ -31,6 +60,10 @@ const MessagesPercentageByMonthChart = () => {
     'Paulina Dominguez': 'rgb(153, 102, 255)', // Mismo color que csupport
   }
 
+  /**
+   * Efecto que carga y procesa los datos para el gráfico
+   * Calcula los porcentajes de mensajes por usuario para cada mes
+   */
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -76,6 +109,11 @@ const MessagesPercentageByMonthChart = () => {
     fetchData()
   }, [])
 
+  /**
+   * Configuración del gráfico
+   * Incluye opciones para mostrar porcentajes y apilar las barras
+   * @type {Object}
+   */
   const options = {
     responsive: true,
     plugins: {

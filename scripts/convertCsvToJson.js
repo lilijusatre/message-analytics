@@ -1,3 +1,9 @@
+/**
+ * Script para convertir datos de mensajes desde CSV a JSON
+ * Procesa estadísticas de mensajes por usuario incluyendo totales y distribuciones
+ * @module convertCsvToJson
+ */
+
 import { readFileSync, writeFileSync } from 'fs'
 import { fileURLToPath } from 'url'
 import { dirname, join } from 'path'
@@ -6,7 +12,10 @@ import { dirname, join } from 'path'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-// Mapeo de nombres de usuario
+/**
+ * Mapeo de IDs de usuario a nombres legibles
+ * @constant {Object.<string, string>}
+ */
 const userNames = {
   'User #955402': 'Zoey Vela',
   'User #943867': 'Lizbeth Bernardo',
@@ -23,7 +32,13 @@ const userNames = {
 const csvPath = join(__dirname, '../public/mensajesPorUsuario.csv')
 const csvData = readFileSync(csvPath, 'utf-8')
 
-// Función para extraer campos del CSV considerando objetos JSON
+/**
+ * Extrae campos de una línea CSV considerando objetos JSON anidados
+ * Maneja correctamente las comillas y llaves para preservar la estructura JSON
+ *
+ * @param {string} line - Línea del CSV a procesar
+ * @returns {string[]} Array con los campos extraídos
+ */
 function extractFields(line) {
   const fields = []
   let currentField = ''
@@ -52,19 +67,21 @@ function extractFields(line) {
   return fields
 }
 
-// Función para limpiar y parsear JSON
+/**
+ * Parsea y limpia strings JSON, manejando casos especiales y errores
+ * Intenta diferentes estrategias de limpieza si el primer intento falla
+ *
+ * @param {string} str - String JSON a parsear
+ * @returns {Object} Objeto JSON parseado o objeto vacío en caso de error
+ */
 function parseJsonSafely(str) {
   try {
-    // Eliminar comillas externas si existen
     let cleanStr = str.replace(/^"/, '').replace(/"$/, '')
-    // Reemplazar comillas escapadas y dobles comillas
     cleanStr = cleanStr.replace(/\\"/g, '"').replace(/""/g, '"')
 
-    // Si el string no comienza con {, añadirlo
     if (!cleanStr.startsWith('{')) {
       cleanStr = '{' + cleanStr
     }
-    // Si el string no termina con }, añadirlo
     if (!cleanStr.endsWith('}')) {
       cleanStr = cleanStr + '}'
     }
@@ -72,7 +89,6 @@ function parseJsonSafely(str) {
     return JSON.parse(cleanStr)
   } catch (error) {
     try {
-      // Intento alternativo: eliminar todas las comillas escapadas
       const altCleanStr = str
         .replace(/^"|"$/g, '')
         .replace(/\\"/g, '"')
@@ -85,7 +101,18 @@ function parseJsonSafely(str) {
   }
 }
 
-// Convertir CSV a JSON
+/**
+ * Convierte datos CSV a formato JSON
+ * Procesa cada línea del CSV y estructura los datos de mensajes por usuario
+ *
+ * @param {string} csv - Contenido del archivo CSV
+ * @returns {Array<{
+ *   usuario: string,
+ *   totalMensajes: number,
+ *   mensajesPorHora: Object.<string, number>,
+ *   mensajesPorDia: Object.<string, number>
+ * }>} Array de objetos con estadísticas de mensajes por usuario
+ */
 function convertCsvToJson(csv) {
   const lines = csv.split('\n')
 
@@ -100,7 +127,7 @@ function convertCsvToJson(csv) {
       if (!Usuario || !TotalMensajes) return null
 
       return {
-        usuario: userNames[Usuario] || Usuario, // Usar el nombre mapeado o mantener el original si no existe mapeo
+        usuario: userNames[Usuario] || Usuario,
         totalMensajes: parseInt(TotalMensajes),
         mensajesPorHora: parseJsonSafely(MensajesPorHora),
         mensajesPorDia: parseJsonSafely(MensajesPorDia),

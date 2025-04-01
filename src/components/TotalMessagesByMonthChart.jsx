@@ -22,12 +22,43 @@ ChartJS.register(
   Legend,
 )
 
+/**
+ * Componente que muestra un gráfico de línea con la evolución del total
+ * de mensajes a lo largo del tiempo.
+ *
+ * @component
+ * @example
+ * ```jsx
+ * <TotalMessagesByMonthChart />
+ * ```
+ *
+ * @returns {JSX.Element} Gráfico de línea con totales mensuales
+ */
 const TotalMessagesByMonthChart = () => {
+  /**
+   * Estado para los datos del gráfico
+   * @type {{
+   *   labels: string[],
+   *   datasets: Array<{
+   *     label: string,
+   *     data: number[],
+   *     borderColor: string,
+   *     backgroundColor: string,
+   *     tension: number,
+   *     fill: boolean
+   *   }>
+   * }}
+   */
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [],
   })
 
+  /**
+   * Efecto que carga y procesa los datos para el gráfico
+   * Realiza una petición fetch al archivo JSON y prepara los datos
+   * para la visualización en Chart.js
+   */
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -55,6 +86,11 @@ const TotalMessagesByMonthChart = () => {
     fetchData()
   }, [])
 
+  /**
+   * Configuración del gráfico
+   * Define las opciones de visualización y formato
+   * @type {Object}
+   */
   const options = {
     responsive: true,
     plugins: {

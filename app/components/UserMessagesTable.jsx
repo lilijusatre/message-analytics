@@ -1,9 +1,36 @@
 'use client'
 import React, { useEffect, useState } from 'react'
 
+/**
+ * Componente que muestra una tabla interactiva con estadísticas detalladas de mensajes por usuario.
+ * Incluye información sobre totales y distribuciones por hora y día de la semana.
+ *
+ * @component
+ * @example
+ * ```jsx
+ * <UserMessagesTable />
+ * ```
+ *
+ * @returns {JSX.Element} Tabla interactiva con estadísticas de mensajes
+ */
 const UserMessagesTable = () => {
+  /**
+   * Estado que almacena los datos de mensajes por usuario
+   * Cada usuario tiene un total de mensajes y distribuciones por hora y día
+   *
+   * @type {Array<{
+   *   usuario: string,
+   *   totalMensajes: number,
+   *   mensajesPorHora: {[key: string]: number}, // Horas del día (0-23)
+   *   mensajesPorDia: {[key: string]: number}   // Días de la semana
+   * }>}
+   */
   const [messages, setMessages] = useState([])
 
+  /**
+   * Efecto que carga los datos de mensajes al montar el componente
+   * Realiza una petición fetch al archivo JSON y maneja posibles errores
+   */
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,6 +45,13 @@ const UserMessagesTable = () => {
     fetchData()
   }, [])
 
+  /**
+   * Renderiza la tabla con los datos de mensajes por usuario
+   * Incluye encabezados, filas con datos y distribuciones detalladas
+   * con scroll vertical para mejor visualización
+   *
+   * @returns {JSX.Element} Tabla con estadísticas de mensajes
+   */
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-bold mb-4">Mensajes por Usuario</h2>

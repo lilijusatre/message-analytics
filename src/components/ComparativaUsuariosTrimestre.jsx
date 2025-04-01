@@ -14,16 +14,58 @@ import { Bar } from 'react-chartjs-2'
 // Registrar los componentes necesarios de Chart.js
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
-const ComparativaUsuarios = () => {
+/**
+ * Componente que muestra gráficos comparativos de mensajes por usuario durante el último trimestre
+ *
+ * @component
+ * @example
+ * ```jsx
+ * <ComparativaUsuariosTrimestre />
+ * ```
+ *
+ * @returns {JSX.Element} Gráficos de barras comparativos del último trimestre
+ */
+const ComparativaUsuariosTrimestre = () => {
+  /**
+   * Estado para los datos del gráfico por hora
+   * @type {{
+   *   labels: string[],
+   *   datasets: Array<{
+   *     label: string,
+   *     data: number[],
+   *     backgroundColor: string,
+   *     borderColor: string,
+   *     borderWidth: number
+   *   }>
+   * }}
+   */
   const [chartDataHoras, setChartDataHoras] = useState({
     labels: [],
     datasets: [],
   })
+
+  /**
+   * Estado para los datos del gráfico por día
+   * @type {{
+   *   labels: string[],
+   *   datasets: Array<{
+   *     label: string,
+   *     data: number[],
+   *     backgroundColor: string,
+   *     borderColor: string,
+   *     borderWidth: number
+   *   }>
+   * }}
+   */
   const [chartDataDias, setChartDataDias] = useState({
     labels: [],
     datasets: [],
   })
 
+  /**
+   * Orden de los días de la semana para la visualización
+   * @type {string[]}
+   */
   const diasOrdenados = [
     'Monday',
     'Tuesday',
@@ -33,6 +75,11 @@ const ComparativaUsuarios = () => {
     'Saturday',
     'Sunday',
   ]
+
+  /**
+   * Mapeo de días en inglés a español
+   * @type {Object.<string, string>}
+   */
   const diasEnEspanol = {
     Monday: 'Lunes',
     Tuesday: 'Martes',
@@ -43,6 +90,11 @@ const ComparativaUsuarios = () => {
     Sunday: 'Domingo',
   }
 
+  /**
+   * Efecto que carga y procesa los datos para los gráficos del último trimestre
+   * Realiza una petición fetch al archivo JSON y prepara los datos
+   * para la visualización en Chart.js
+   */
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -88,6 +140,10 @@ const ComparativaUsuarios = () => {
             dia => mensajesEntrantes.mensajesPorDia[dia] || 0,
           )
 
+          /**
+           * Configuración de colores y estilos para los datasets
+           * @type {Array<Object>}
+           */
           const datasetConfig = [
             {
               label: 'Lizbeth B',
@@ -139,6 +195,10 @@ const ComparativaUsuarios = () => {
     fetchData()
   }, [])
 
+  /**
+   * Opciones comunes para ambos gráficos
+   * @type {Object}
+   */
   const commonOptions = {
     responsive: true,
     plugins: {
@@ -168,13 +228,17 @@ const ComparativaUsuarios = () => {
     },
   }
 
+  /**
+   * Opciones específicas para el gráfico por hora
+   * @type {Object}
+   */
   const optionsHoras = {
     ...commonOptions,
     plugins: {
       ...commonOptions.plugins,
       title: {
         display: true,
-        text: 'Comparativa de Mensajes por Hora',
+        text: 'Comparativa de Mensajes por Hora (Último Trimestre)',
         font: { size: 16 },
       },
     },
@@ -189,13 +253,17 @@ const ComparativaUsuarios = () => {
     },
   }
 
+  /**
+   * Opciones específicas para el gráfico por día
+   * @type {Object}
+   */
   const optionsDias = {
     ...commonOptions,
     plugins: {
       ...commonOptions.plugins,
       title: {
         display: true,
-        text: 'Comparativa de Mensajes por Día',
+        text: 'Comparativa de Mensajes por Día (Último Trimestre)',
         font: { size: 16 },
       },
     },
@@ -224,4 +292,4 @@ const ComparativaUsuarios = () => {
   )
 }
 
-export default ComparativaUsuarios
+export default ComparativaUsuariosTrimestre

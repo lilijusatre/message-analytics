@@ -13,13 +13,42 @@ import { Bar } from 'react-chartjs-2'
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend)
 
+/**
+ * Componente que muestra un gráfico de barras apiladas con la cantidad
+ * total de mensajes por usuario para cada mes.
+ *
+ * @component
+ * @example
+ * ```jsx
+ * <MessagesByMonthChart />
+ * ```
+ *
+ * @returns {JSX.Element} Gráfico de barras apiladas con totales mensuales
+ */
 const MessagesByMonthChart = () => {
+  /**
+   * Estado para los datos del gráfico
+   * @type {{
+   *   labels: string[],
+   *   datasets: Array<{
+   *     label: string,
+   *     data: number[],
+   *     backgroundColor: string,
+   *     borderColor: string,
+   *     borderWidth: number
+   *   }>
+   * }}
+   */
   const [chartData, setChartData] = useState({
     labels: [],
     datasets: [],
   })
 
-  // Mapeo fijo de colores para cada usuario
+  /**
+   * Mapeo fijo de colores para cada usuario
+   * Los colores se mantienen consistentes en toda la aplicación
+   * @type {Object.<string, string>}
+   */
   const userColors = {
     'Lizbeth Bernardo': 'rgb(75, 192, 192)',
     'mensajes automaticos': 'rgb(255, 99, 132)',
@@ -31,6 +60,11 @@ const MessagesByMonthChart = () => {
     'Paulina Dominguez': 'rgb(153, 102, 255)', // Mismo color que csupport
   }
 
+  /**
+   * Efecto que carga y procesa los datos para el gráfico
+   * Realiza una petición fetch al archivo JSON y prepara los datos
+   * para la visualización en Chart.js
+   */
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -70,6 +104,11 @@ const MessagesByMonthChart = () => {
     fetchData()
   }, [])
 
+  /**
+   * Configuración del gráfico
+   * Define las opciones de visualización y formato
+   * @type {Object}
+   */
   const options = {
     responsive: true,
     plugins: {
